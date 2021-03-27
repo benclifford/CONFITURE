@@ -178,6 +178,7 @@ def phase1():
         pixels.show()
         time.sleep(delay)
         c += step
+        yield
 
 def phase2():
     def norm(x): # normalise -1 .. 1 for display
