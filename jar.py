@@ -8,16 +8,20 @@ pixels = neopixel.NeoPixel(board.GP2, 49, auto_write=False)
 
 
 def contr2():
+  hue = 0
   while True:
-    pixels.fill( (0,0,0) )
+    col = hue_saturated(hue)
+    contr = hue_saturated((hue + 0.5) % 1)
     for n in range(0, 49):
       if random.random() > 0.5:
-        pixels[n] = (2, 64, 16)
+        pixels[n] = col
       else:
-        pixels[n] = (64, 2, 16)
+        pixels[n] = contr
             
     pixels.show()
     time.sleep(1)
+
+    hue = (hue + 0.01) % 1.0
     yield
 
 def flame1():
