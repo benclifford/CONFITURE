@@ -12,7 +12,7 @@ rotary_encoder = rotaryio.IncrementalEncoder(board.GP3, board.GP4)
 
 n = 0
 
-modes = [jar.primaryswitcher1, jar.phase4, jar.primaryswitcher2, jar.contr2, jar.phase1]
+modes = [jar.primaryswitcher1, jar.phase4, jar.primaryswitcher2, jar.contr2, jar.phase1, jar.rgb1]
 
 while True:
   print(f"driving, iteration {n}, encoder is {rotary_encoder.position}")

@@ -334,7 +334,10 @@ def rgb1():
         else:
             pixels[n] = (0,0,255)
 
-    pixels.show()
+    while True:
+        pixels.show()
+        time.sleep(0.1)
+        yield
 
 def primaryswitcher1():
 
