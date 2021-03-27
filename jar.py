@@ -253,6 +253,7 @@ def phase4():
             pixels[n] = (r, g, b)
         pixels.show()
         time.sleep(delay)
+        yield
         c += step
 
 def phase5():
@@ -355,13 +356,17 @@ def primaryswitcher1():
             pixels[n] = col
             pixels.show()
             time.sleep(0.01) # about half a second to fill
+            yield
 
-        time.sleep(2)
+        for n in range(0,200):
+            time.sleep(0.01)
+            yield
 
         for n in range(0,49):
             pixels[48-n] = (0,0,0)
             pixels.show()
             time.sleep(0.01) # about half a second to fill
+            yield
 
 
 def primaryswitcher2():
