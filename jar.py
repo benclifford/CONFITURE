@@ -24,6 +24,7 @@ def contr2():
             
     pixels.show()
     time.sleep(1)
+    yield
 
 def flame1():
     while True:
