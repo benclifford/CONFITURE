@@ -7,12 +7,6 @@ import math
 pixels = neopixel.NeoPixel(board.GP2, 49, auto_write=False)
 
 
-def contr1():
-    pixels.fill( (64, 2, 16) )
-    for n in range(0, 24):
-        pixels[n*2] = (2, 64, 16)
-    pixels.show()
-
 def contr2():
   while True:
     pixels.fill( (0,0,0) )
