@@ -385,6 +385,7 @@ def primaryswitcher2():
             pixels[n] = col
             pixels.show()
             time.sleep(0.005)
+            yield
 
 def gamma(x):
     return math.pow(x, 2.3)
