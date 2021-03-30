@@ -11,7 +11,7 @@ modes = [jar.primaryswitcher1, jar.phase4, jar.primaryswitcher2, jar.contr2, jar
 
 def main_driver():
   n = 0
-  current_mode = jar.primaryswitcher1()
+  current_mode = modes[0]()
   current_mode_pos = 0
   while True:
     # print(f"driving, iteration {n}, encoder is {rotary_encoder.position}")
