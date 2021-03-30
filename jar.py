@@ -361,8 +361,9 @@ def primaryswitcher1():
             time.sleep(0.01) # about half a second to fill
             yield
 
-        for n in range(0,200):
-            time.sleep(0.01)
+        t = time.time()
+        while time.time() - t < 2:
+            time.sleep(0.2)
             yield
 
         for n in range(0,49):
