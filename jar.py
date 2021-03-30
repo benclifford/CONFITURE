@@ -24,6 +24,28 @@ def contr2():
     hue = (hue + 0.01) % 1.0
     yield
 
+def contr3():
+  hue = random.random()
+  while True:
+    col = hue_saturated(hue)
+    contr = hue_saturated((hue + 0.5) % 1)
+    pixel = random.randint(0,48)
+    state = random.randint(0,3)
+
+    if state == 0:
+        pixels[pixel] = col
+    elif state == 1:
+        pixels[pixel] = contr
+    else: # all other cases, off
+        pixels[pixel] = (0, 0, 0)
+            
+    pixels.show()
+    time.sleep(0.01)
+
+    hue = (hue + 0.0001) % 1.0
+    yield
+
+
 def flame1():
     while True:
         pixels.fill( (0,0,0) )
