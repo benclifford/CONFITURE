@@ -391,6 +391,39 @@ def primaryswitcher2():
             time.sleep(0.005)
             yield
 
+
+def fountain1():
+    pix = [None] * 49
+    pixels.fill( (0,0,0) )
+    pixels.show()
+
+    while True:
+        if random.randint(0,4) == 0:
+            pix[48] = (int(math.pow(2, random.randint(0,7))),
+                       int(math.pow(2, random.randint(0,7))),
+                       int(math.pow(2, random.randint(0,7))))
+        # print("==")
+        for n in range(0, 49):
+            d = random.randint(0,2)
+            nd = n - d
+            k = pix[n]
+            pix[n] = None
+            if nd >= 0 and pix[nd] is None:
+                pix[nd] = k
+            elif nd >= 0:  # (and pix[nd] is not None)
+                pix[n] = k # put the pixel back unmoved
+            # else it falls off the end and we don't set anything
+
+        for n in range(0,49):
+            if pix[n] is None:
+                pixels[n] = (0,0,0)
+            else:
+                pixels[n] = pix[n]
+        pixels.show()
+        time.sleep(0.1)
+        yield
+
+
 def gamma(x):
     return math.pow(x, 2.3)
 
