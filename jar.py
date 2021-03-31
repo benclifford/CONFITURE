@@ -446,14 +446,44 @@ def fountain1():
         yield
 
 
+def threepart1():
+    pixels.fill( (0,0,0) )
+    pixels.show()
+    lastrand = -1 # make this into a generator
+
+    while True:
+
+        # TODO: make this into a generator that is almost-rand
+        n = random.randint(0,2)
+        while n == lastrand: 
+            n = random.randint(0,2)
+        lastrand = n
+
+        if n == 0:
+            base = 0
+        elif n == 1:
+            base = 16
+        else:
+            base = 32
+
+        rgb = hue_saturated(n / 3.0)
+        for p in range(base, base+16):
+            pixels[p] = rgb
+        pixels.show()
+        time.sleep(0.3)
+        for p in range(base, base+16):
+            pixels[p] = (0,0,0)
+        pixels.show()
+        yield
+
 def gamma(x):
     return math.pow(x, 2.3)
 
 def hue_saturated(hue):
     angle = math.pi * 2.0 * hue
-    r = math.sin(angle)
-    g = math.sin(angle + math.pi * 2.0 / 3.0)
-    b = math.sin(angle - math.pi * 2.0 / 3.0)
+    r = math.cos(angle)
+    g = math.cos(angle + math.pi * 2.0 / 3.0)
+    b = math.cos(angle - math.pi * 2.0 / 3.0)
     return (norm(r), norm(g), norm(b))
 
 def norm(x): # normalise -1 .. 1 and gamma correct for display 
