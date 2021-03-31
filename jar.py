@@ -476,6 +476,26 @@ def threepart1():
         pixels.show()
         yield
 
+
+def vert1():
+    pixels.fill( (0,0,0) )
+    pixels.show()
+
+    while True:
+
+        base = random.randint(0,49)
+
+        rgb = hue_saturated(base / 49.0)
+
+        for p in range(base, base+8):
+            pixels[p % 49] = rgb
+
+        pixels.show()
+        time.sleep(0.1)
+        pixels.fill( (0,0,0) )
+        pixels.show()
+        yield
+
 def gamma(x):
     return math.pow(x, 2.3)
 
