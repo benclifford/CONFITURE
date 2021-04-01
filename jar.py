@@ -63,8 +63,6 @@ def drip1():
       pixels[n] = (0,0,0)
       pixels.show()
 
-     
-
 
 def huespin1():
   hue = random.random()
@@ -76,6 +74,20 @@ def huespin1():
     hue = (hue + 0.03) % 1.0
     time.sleep(0.03)
     yield
+
+
+def huespin2():
+  hue = random.random()
+  while True:
+    n = random.randint(0,48)
+    rgb = hue_saturated((hue + random.random() * 0.3) % 1.0)
+    pixels[n] = rgb
+    pixels.show()
+    pixels[n] = (0,0,0)
+    time.sleep(0.01)
+    yield
+
+    hue = (hue + 0.001) % 1.0
 
 def centre1():
   width = 6
