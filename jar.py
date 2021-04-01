@@ -6,6 +6,16 @@ import math
 
 pixels = neopixel.NeoPixel(board.GP2, 49, auto_write=False)
 
+def huespin1():
+  hue = random.random()
+  while True:
+    rgb = hue_saturated(hue)
+    pixels.fill(rgb)
+    pixels.show()
+
+    hue = (hue + 0.03) % 1.0
+    time.sleep(0.03)
+    yield
 
 def centre1():
   width = 6
