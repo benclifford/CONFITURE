@@ -6,6 +6,32 @@ import math
 
 pixels = neopixel.NeoPixel(board.GP2, 49, auto_write=False)
 
+def rainbow1():
+
+  base = 0
+  while True:
+    for n in range(0,49):
+      v = 1 + (base + n) % 6 # cycle through 1..6
+      if v & 1 == 0:
+        r = 255
+      else:
+        r = 0
+      if v & 2 == 0:
+        g = 255
+      else:
+        g = 0
+      if v & 4 == 0:
+        b = 255
+      else:
+        b = 0
+      pixels[n] = (r, g, b)
+    pixels.show()
+    time.sleep(0.1)
+    base = (base + 1) % 6
+    yield
+    
+
+
 def drip1():
   pixels.fill( (0,0,0) )
 
