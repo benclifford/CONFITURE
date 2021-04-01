@@ -77,6 +77,7 @@ def huespin1():
 
 
 def huespin2():
+  pixels.fill( (0,0,0) )
   hue = random.random()
   while True:
     n = random.randint(0,48)
