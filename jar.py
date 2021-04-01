@@ -90,6 +90,27 @@ def huespin2():
 
     hue = (hue + 0.001) % 1.0
 
+
+def huespin3():
+  print("huespin3")
+  pixels.fill( (0,0,0) )
+  hue = random.random()
+  while True:
+
+    for n in range(0,49):
+      (r,g,b) = pixels[n]
+      pixels[n] = (r * 2/3, g * 2/3, b * 2/3)
+
+    n = random.randint(0,48)
+    rgb = hue_saturated((hue + random.random() * 0.3) % 1.0)
+    pixels[n] = rgb
+    pixels.show()
+    # pixels[n] = (0,0,0)
+    time.sleep(0.1)
+    yield
+
+    hue = (hue + 0.01) % 1.0
+
 def centre1():
   width = 6
   while True:
