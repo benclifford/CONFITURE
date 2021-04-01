@@ -6,6 +6,40 @@ import math
 
 pixels = neopixel.NeoPixel(board.GP2, 49, auto_write=False)
 
+def drip1():
+  pixels.fill( (0,0,0) )
+
+  hue = random.random()
+
+  while True:
+
+    rgb = hue_saturated(hue)
+    contr_rgb = hue_saturated((hue + 0.3) % 1.0)
+
+    for n in range(0, 3):
+      pixels[n] = rgb
+    
+    for n in range(46, 49):
+      pixels[n] = rgb
+
+    pixels.show()
+
+    # TODO: interruptible sleep
+    for n in range(0,9):
+      time.sleep(0.1)
+      yield
+
+    for n in range(3,46):
+      pixels[n] = contr_rgb
+      pixels.show()
+      time.sleep(0.01)
+      yield
+      pixels[n] = (0,0,0)
+      pixels.show()
+
+     
+
+
 def huespin1():
   hue = random.random()
   while True:
