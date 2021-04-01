@@ -7,6 +7,24 @@ import math
 pixels = neopixel.NeoPixel(board.GP2, 49, auto_write=False)
 
 
+def centre1():
+  width = 6
+  while True:
+    pixels.fill( (0,0,0) )
+    for p in range(24 - width, 24 + width):
+      pixels[p] = (255, 255, 255)
+    pixels.show()
+
+    # TODO: random walk generator
+    width += random.randint(-1,1)
+    if width > 12:
+        width = 12
+    if width < 2:
+        width = 2
+    time.sleep(0.02)
+    yield
+
+
 def contr2():
   hue = 0
   while True:
