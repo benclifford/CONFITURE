@@ -174,6 +174,19 @@ def huespin5():
     yield
 
 
+def huespin6():
+  hue = random.random()
+  while True:
+    for n in range(0,49):
+      rgb = hue_saturated2(hue + random.random() * 0.25, v = random.random() * 0.5 + 0.5)
+      pixels[n] = rgb
+    pixels.show()
+
+    hue = (hue + 0.05) % 1.0
+    time.sleep(0.05)
+    yield
+
+
 
 def centre1():
   width = 6
