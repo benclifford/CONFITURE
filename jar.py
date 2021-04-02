@@ -111,6 +111,28 @@ def huespin3():
 
     hue = (hue + 0.01) % 1.0
 
+
+def huespin4():
+  hue = random.random()
+  while True:
+    hue = (hue + 0.2 + random.random() * 0.5)
+    for brightness in range(0,10):
+        rgb = hue_saturated(hue, v=brightness/10.0)
+        pixels.fill(rgb)
+        pixels.show()
+        time.sleep(0.03)
+        yield
+    for brightness in range(10,-1,-1):
+        rgb = hue_saturated(hue, v=brightness/10.0)
+        pixels.fill(rgb)
+        pixels.show()
+        time.sleep(0.03)
+        yield
+
+    time.sleep(1)
+    yield
+
+
 def centre1():
   width = 6
   while True:
@@ -640,11 +662,11 @@ def vert2():
 def gamma(x):
     return math.pow(x, 2.3)
 
-def hue_saturated(hue):
+def hue_saturated(hue, v=1.0):
     angle = math.pi * 2.0 * hue
-    r = math.cos(angle)
-    g = math.cos(angle + math.pi * 2.0 / 3.0)
-    b = math.cos(angle - math.pi * 2.0 / 3.0)
+    r = math.cos(angle) * v
+    g = math.cos(angle + math.pi * 2.0 / 3.0) * v
+    b = math.cos(angle - math.pi * 2.0 / 3.0) * v
     return (norm(r), norm(g), norm(b))
 
 def norm(x): # normalise -1 .. 1 and gamma correct for display 
