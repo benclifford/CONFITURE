@@ -6,6 +6,29 @@ import math
 
 pixels = neopixel.NeoPixel(board.GP2, 49, auto_write=False)
 
+
+def pixphase1():
+  phases = [0] * 49
+  phase_shifts = [0.01] * 49
+  for n in range(0,49):
+    phases[n] = random.random()
+    phase_shifts[n] += random.random() * 0.01
+
+  while True:
+    for n in range(0, 49):
+      p_phase = phases[n] * 6.28
+      r = norm(math.sin(p_phase))
+      g = norm(math.sin(p_phase))
+      b = norm(math.sin(p_phase))
+      pixels[n] = (r, g, b)
+
+      phases[n] = (phases[n] + phase_shifts[n]) % 1.0
+    pixels.show()
+    time.sleep(0.02)
+    yield
+     
+
+
 def rainbow1():
 
   base = 0
