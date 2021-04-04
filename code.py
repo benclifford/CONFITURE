@@ -5,7 +5,7 @@ import jar
 
 print("CONFITURE: jam jar executive")
 
-rotary_encoder = rotaryio.IncrementalEncoder(board.GP3, board.GP4)
+rotary_encoder = rotaryio.IncrementalEncoder(board.GP5, board.GP6)
 
 modes = [jar.pixphase1, jar.huespin6, jar.huespin5, jar.huespin4, jar.huespin3, jar.huespin2, jar.rainbow1, jar.drip1, jar.huespin1, jar.centre1, jar.vert1, jar.vert2, jar.threepart1, jar.primaryswitcher1, jar.phase4, jar.primaryswitcher2, jar.contr2, jar.phase1, jar.rgb1, jar.fountain1, jar.contr3]
 
