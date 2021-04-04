@@ -4,7 +4,7 @@ import random
 import time
 import math
 
-pixels = neopixel.NeoPixel(board.GP2, 49, auto_write=False)
+pixels = neopixel.NeoPixel(board.GP13, 49, auto_write=False)
 
 
 def pixphase1():
