@@ -14,8 +14,7 @@ def solid(r,g,b):
     for n in range(0, configuration.num_leds):
       pixels[n] = (r,g,b)
     pixels.show()
-    time.sleep(0.1)
-    yield
+    yield 0.1
 
 
 def static_random():
@@ -26,8 +25,7 @@ def static_random():
     pixels[n] = (r,g,b)
   while True:
     pixels.show()
-    time.sleep(0.1)
-    yield
+    yield 0.1
 
 def static_saturated_random():
   for n in range(0, configuration.num_leds):
@@ -39,8 +37,7 @@ def static_saturated_random():
     pixels[n] = (r,g,b)
   while True:
     pixels.show()
-    time.sleep(0.1)
-    yield
+    yield 0.1
 
 def static_saturated_rainbow():
   for n in range(0, configuration.num_leds):
@@ -53,8 +50,7 @@ def static_saturated_rainbow():
     pixels[n] = (r,g,b)
   while True:
     pixels.show()
-    time.sleep(0.1)
-    yield
+    yield 0.1
 
 
 
@@ -75,8 +71,7 @@ def pixphase1():
 
       phases[n] = (phases[n] + phase_shifts[n]) % 1.0
     pixels.show()
-    time.sleep(0.02)
-    yield
+    yield 0.02
      
 
 
@@ -100,9 +95,8 @@ def rainbow1():
         b = 0
       pixels[n] = (r, g, b)
     pixels.show()
-    time.sleep(0.1)
     base = (base + 1) % 6
-    yield
+    yield 0.1
     
 
 
@@ -126,14 +120,12 @@ def drip1():
 
     # TODO: interruptible sleep
     for n in range(0,9):
-      time.sleep(0.1)
-      yield
+      yield 0.1
 
     for n in range(3,46):
       pixels[n] = contr_rgb
       pixels.show()
-      time.sleep(0.01)
-      yield
+      yield 0.01
       pixels[n] = (0,0,0)
       pixels.show()
 
@@ -146,8 +138,7 @@ def huespin1():
     pixels.show()
 
     hue = (hue + 0.03) % 1.0
-    time.sleep(0.03)
-    yield
+    yield 0.03
 
 
 def huespin2():
@@ -159,8 +150,7 @@ def huespin2():
     pixels[n] = rgb
     pixels.show()
     pixels[n] = (0,0,0)
-    time.sleep(0.01)
-    yield
+    yield 0.01
 
     hue = (hue + 0.001) % 1.0
 
@@ -180,8 +170,7 @@ def huespin3():
     pixels[n] = rgb
     pixels.show()
     # pixels[n] = (0,0,0)
-    time.sleep(0.1)
-    yield
+    yield 0.1
 
     hue = (hue + 0.01) % 1.0
 
@@ -194,17 +183,14 @@ def huespin4():
         rgb = hue_saturated(hue, v=brightness/10.0)
         pixels.fill(rgb)
         pixels.show()
-        time.sleep(0.03)
-        yield
+        yield 0.03
     for brightness in range(10,-1,-1):
         rgb = hue_saturated(hue, v=brightness/10.0)
         pixels.fill(rgb)
         pixels.show()
-        time.sleep(0.03)
-        yield
+        yield 0.03
 
-    time.sleep(1)
-    yield
+    yield 1
 
 
 def huespin5():
@@ -215,17 +201,14 @@ def huespin5():
         rgb = hue_saturated2(hue, v = brightness / 10.0)
         pixels.fill(rgb)
         pixels.show()
-        time.sleep(0.03)
-        yield
+        yield 0.03
     for brightness in range(10,-1,-1):
         rgb = hue_saturated2(hue, v = brightness / 10.0)
         pixels.fill(rgb)
         pixels.show()
-        time.sleep(0.03)
-        yield
+        yield 0.03
 
-    time.sleep(1)
-    yield
+    yield 1
 
 
 def huespin5():
@@ -236,14 +219,12 @@ def huespin5():
     for n in range(0,configuration.num_leds):
         pixels[n] = rgb
         pixels.show()
-        time.sleep(0.03)
-        yield
+        yield 0.03
     for brightness in range(10,-1,-1):
         rgb = hue_saturated2(hue, v = brightness / 10.0)
         pixels.fill(rgb)
         pixels.show()
-        time.sleep(0.03)
-        yield
+        yield 0.03
 
     yield
 
@@ -257,8 +238,7 @@ def huespin6():
     pixels.show()
 
     hue = (hue + 0.05) % 1.0
-    time.sleep(0.05)
-    yield
+    yield 0.05
 
 
 
@@ -276,8 +256,7 @@ def centre1():
         width = 12
     if width < 2:
         width = 2
-    time.sleep(0.02)
-    yield
+    yield 0.02
 
 
 def contr2():
@@ -292,10 +271,9 @@ def contr2():
         pixels[n] = contr
             
     pixels.show()
-    time.sleep(1)
 
     hue = (hue + 0.01) % 1.0
-    yield
+    yield 1
 
 def contr3():
   hue = random.random()
@@ -313,10 +291,9 @@ def contr3():
         pixels[pixel] = (0, 0, 0)
             
     pixels.show()
-    time.sleep(0.01)
 
     hue = (hue + 0.0001) % 1.0
-    yield
+    yield 0.01
 
 
 def flame1():
@@ -475,9 +452,8 @@ def phase1():
             b = norm(math.sin(c + p_phase))
             pixels[n] = (r, g, b)
         pixels.show()
-        time.sleep(delay)
         c += step
-        yield
+        yield delay
 
 def phase2():
     def norm(x): # normalise -1 .. 1 for display
@@ -547,8 +523,7 @@ def phase4():
             b = norm(math.sin(c * (-1.11) + p_phase + 6.28/3.0*2.0))
             pixels[n] = (r, g, b)
         pixels.show()
-        time.sleep(delay)
-        yield
+        yield delay
         c += step
 
 def phase5():
@@ -635,8 +610,7 @@ def rgb1():
 
     while True:
         pixels.show()
-        time.sleep(0.1)
-        yield
+        yield 0.1
 
 def primaryswitcher1():
 
@@ -653,19 +627,16 @@ def primaryswitcher1():
         for n in range(0,configuration.num_leds):
             pixels[n] = col
             pixels.show()
-            time.sleep(0.01) # about half a second to fill
-            yield
+            yield 0.01  # about half a second to fill
 
         t = time.time()
         while time.time() - t < 2:
-            time.sleep(0.2)
-            yield
+            yield 0.2
 
         for n in range(0,configuration.num_leds):
             pixels[48-n] = (0,0,0)
             pixels.show()
-            time.sleep(0.01) # about half a second to fill
-            yield
+            yield 0.01
 
 
 def primaryswitcher2():
@@ -683,8 +654,7 @@ def primaryswitcher2():
         for n in range(0,configuration.num_leds):
             pixels[n] = col
             pixels.show()
-            time.sleep(0.005)
-            yield
+            yield 0.005
 
 
 def fountain1():
@@ -715,8 +685,7 @@ def fountain1():
             else:
                 pixels[n] = pix[n]
         pixels.show()
-        time.sleep(0.1)
-        yield
+        yield 0.1
 
 
 def threepart1():
@@ -743,11 +712,11 @@ def threepart1():
         for p in range(base, base+16):
             pixels[p] = rgb
         pixels.show()
-        time.sleep(0.3)
+        yield 0.3
         for p in range(base, base+16):
             pixels[p] = (0,0,0)
         pixels.show()
-        yield
+        yield 0
 
 
 def vert1():
@@ -764,10 +733,9 @@ def vert1():
             pixels[p % configuration.num_leds] = rgb
 
         pixels.show()
-        time.sleep(0.1)
+        yield 0.1
         pixels.fill( (0,0,0) )
         pixels.show()
-        yield
 
 
 def vert2():
@@ -784,8 +752,7 @@ def vert2():
             pixels[p % configuration.num_leds] = rgb
 
         pixels.show()
-        time.sleep(0.01)
-        yield
+        yield 0.01
 
 
 def gamma(x):

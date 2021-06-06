@@ -61,7 +61,11 @@ def main_driver():
       print(f"New mode {new_mode}")
       current_mode = mode_list[new_mode]()
 
-    current_mode.__next__()
+    v = current_mode.__next__()
+
+    if v:
+      time.sleep(v)
+
     n += 1
 
 if __name__ == "__main__":
