@@ -779,7 +779,29 @@ def vert2():
         yield 0.01
 
 
+# given a phase return the relevant colour
+# phase will go from 0..29
+def firefly_green_red(phase):
+  if phase < 10:
+    return (0,0,0)
+  elif phase <= 20:
+    return (0,255,0)
+  elif phase <= 25:
+    return (64,64,0)
+  elif phase <= 26:
+    return (32,16,0)
+  elif phase <= 27:
+    return (16,4,0)
+  elif phase <= 28:
+    return (8,0,0)
+  elif phase <= 29:
+    return (4,0,0)
+  else: 
+    return (0,0,0)
+
 def firefly():
+
+  led_function = firefly_green_red
 
   pixels.fill( (0,0,0) )
   pixels.show()
@@ -807,9 +829,9 @@ def firefly():
     # print("")
     for n in range(0, configuration.num_leds):
       # print(f"pixel {n}={phase[n]}  ", end='')
+      pixels[n] = led_function(phase[n])
 
       if phase[n] < 10:
-        pixels[n] = (0,0,0)
         if n >= 1 and phase[n-1] >= 10 and phase[n-1] <= 25: # negative neighbour alive
           phase[n] += 1
         elif n < configuration.num_leds - 1 and phase[n+1] >= 10 and phase[n+1] <= 25: # positive  neighbour alive
@@ -818,20 +840,7 @@ def firefly():
           phase[n] -= 1  # reduce stored intensity if no stimulus
 
       elif phase[n] >= 10:  # stepping through the activated sequence
-        if phase[n] <= 20:
-          pixels[n] = (0,255,0) # TODO: proceed through sequence
-        elif phase[n] <= 25:
-          pixels[n] = (64,64,0) # TODO: proceed through sequence
-        elif phase[n] <= 26:
-          pixels[n] = (32,16,0) # TODO: proceed through sequence
-        elif phase[n] <= 27:
-          pixels[n] = (16,4,0) # TODO: proceed through sequence
-        elif phase[n] <= 28:
-          pixels[n] = (8,0,0) # TODO: proceed through sequence
-        elif phase[n] <= 29:
-          pixels[n] = (4,0,0) # TODO: proceed through sequence
-        else: 
-          pixels[n] = (0,0,0) # TODO: proceed through sequence
+
         phase[n] += 1
         if phase[n] > 30:
           phase[n] = 0
