@@ -28,7 +28,8 @@ def partial_by_range(func, start, end, step):
 static_modes = [jar.rgb1,
                jar.static_random,
                jar.static_saturated_random,
-               jar.static_saturated_rainbow] + \
+               jar.static_saturated_rainbow,
+               jar.nightlight] + \
                partial_by_range(jar.solid_saturated, 0, 1, 0.04) + \
                partial_by_range(jar.static_white_dither, 0.1, 1, 0.1) + \
                partial_by_range(jar.static_saturated_magnified_rainbow, 0, 1, 0.05)

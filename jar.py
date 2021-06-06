@@ -9,6 +9,16 @@ import configuration
 pixels = neopixel.NeoPixel(configuration.neopixel_pin, configuration.num_leds, auto_write=False)
 
 
+def nightlight():
+  for n in range(0, configuration.num_leds):
+    pixels[n] = (1,0,0)
+
+  while True:
+    pixels.show()
+    yield 0.1
+
+
+
 def solid_saturated(phase):
   tri = 6.28 / 3.0
   p_phase = phase * 6.28
