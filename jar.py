@@ -53,6 +53,14 @@ def static_saturated_rainbow():
     yield 0.1
 
 
+def static_white_every_n(n):
+  pixels.fill( (0,0,0) )
+  for p in range(0, configuration.num_leds,n):
+    pixels[p] = (255,255,255)
+  while True:
+    pixels.show()
+    yield 0.1
+
 
 def pixphase1():
   phases = [0] * configuration.num_leds 
