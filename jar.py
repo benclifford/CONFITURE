@@ -9,13 +9,20 @@ import configuration
 pixels = neopixel.NeoPixel(configuration.neopixel_pin, configuration.num_leds, auto_write=False)
 
 
-def solid(r,g,b):
+def solid_saturated(phase):
+  tri = 6.28 / 3.0
+  p_phase = phase * 6.28
+  r = norm(math.sin(p_phase + tri))
+  g = norm(math.sin(p_phase - tri))
+  b = norm(math.sin(p_phase))
+
+  
+  for n in range(0, configuration.num_leds):
+    pixels[n] = (r,g,b)
+
   while True:
-    for n in range(0, configuration.num_leds):
-      pixels[n] = (r,g,b)
     pixels.show()
     yield 0.1
-
 
 def static_random():
   for n in range(0, configuration.num_leds):
