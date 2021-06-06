@@ -9,6 +9,14 @@ import configuration
 pixels = neopixel.NeoPixel(configuration.neopixel_pin, configuration.num_leds, auto_write=False)
 
 
+def solid(r,g,b):
+  while True:
+    for n in range(0, configuration.num_leds):
+      pixels[n] = (r,g,b)
+    pixels.show()
+    time.sleep(0.1)
+    yield
+
 def pixphase1():
   phases = [0] * configuration.num_leds 
   phase_shifts = [0.01] * configuration.num_leds
