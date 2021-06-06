@@ -21,9 +21,9 @@ def main_driver():
     # print(f"driving, iteration {n}, encoder is {rotary_encoder.position}")
 
     if rotary_encoder.position != current_mode_pos:
-      print("Changing mode")
       current_mode_pos = rotary_encoder.position
       new_mode = current_mode_pos % len(modes)
+      print(f"New mode {new_mode}")
       current_mode = modes[new_mode]()
 
     current_mode.__next__()
