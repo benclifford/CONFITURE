@@ -30,7 +30,9 @@ static_modes = [jar.rgb1,
                jar.static_saturated_random,
                jar.static_saturated_rainbow] + \
                partial_by_range(jar.solid_saturated, 0, 1, 0.04) + \
-               partial_by_range(jar.static_white_dither, 0, 1, 0.1)
+               partial_by_range(jar.static_white_dither, 0, 1, 0.1) + \
+               partial_by_range(jar.static_saturated_magnified_rainbow, 0, 1, 0.1)
+
 
 dynamic_modes = [jar.pixphase1, jar.huespin6, jar.huespin5, jar.huespin4, jar.huespin3, jar.huespin2, jar.rainbow1, jar.drip1, jar.huespin1, jar.centre1, jar.vert1, jar.vert2, jar.threepart1, jar.primaryswitcher1, jar.phase4, jar.primaryswitcher2, jar.contr2, jar.phase1, jar.fountain1, jar.contr3,
   partial(jar.firefly, jar.firefly_rainbow),
