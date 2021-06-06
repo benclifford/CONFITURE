@@ -6,8 +6,6 @@ import math
 
 import configuration
 
-# pixels = neopixel.NeoPixel(board.GP13, 49, auto_write=False)
-
 pixels = neopixel.NeoPixel(configuration.neopixel_pin, configuration.num_leds, auto_write=False)
 
 
