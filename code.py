@@ -2,6 +2,7 @@ import board
 import rotaryio
 import digitalio
 
+import random
 import time
 
 import jar
@@ -50,6 +51,8 @@ def main_driver():
   modeset = True  # True/False to represent dynamic/static modes
   current_modeset = modeset
 
+  autochange = time.time()
+
   if modeset:
     mode_list = dynamic_modes
   else:
@@ -57,12 +60,16 @@ def main_driver():
 
   current_mode = mode_list[0]()
   current_mode_pos = 0
+
   while True:
     if not rotary_button.value:
       modeset = not modeset
+      if modeset:
+        autochange = time.time() # turn on autochange if going into dynamic mode
       time.sleep(0.1)
 
     if rotary_encoder.position != current_mode_pos or current_modeset != modeset:
+      autochange = None  # turn off autochange if a (dynamic) mode is manually selected
       current_mode_pos = rotary_encoder.position
 
       if modeset:
@@ -75,6 +82,22 @@ def main_driver():
       new_mode = current_mode_pos % len(mode_list)
       print(f"New mode {new_mode}")
       current_mode = mode_list[new_mode]()
+
+    elif autochange is not None and (autochange + 60) < time.time():
+      autochange = time.time()
+ 
+      if modeset:
+        mode_list = dynamic_modes
+      else:
+        mode_list = static_modes
+
+      current_modeset = modeset
+
+      new_mode = random.randint(0, len(mode_list) - 1)
+      print(f"New autochange mode {new_mode}")
+      current_mode = mode_list[new_mode]()
+
+   
 
     v = current_mode.__next__()
 
