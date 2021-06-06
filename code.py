@@ -65,11 +65,18 @@ def main_driver():
     if not rotary_button.value:
       modeset = not modeset
       if modeset:
+        print("enabling autochange due to entering dynamic mode")
         autochange = time.time() # turn on autochange if going into dynamic mode
+      else:
+        print("disabling autochange due to entering static mode")
+        autochange = None
       time.sleep(0.1)
 
     if rotary_encoder.position != current_mode_pos or current_modeset != modeset:
-      autochange = None  # turn off autochange if a (dynamic) mode is manually selected
+      if rotary_encoder.position != current_mode_pos:
+        autochange = None  # turn off autochange if a (dynamic) mode is manually selected
+        print("disabling autochange due to manual change")
+
       current_mode_pos = rotary_encoder.position
 
       if modeset:
@@ -85,6 +92,7 @@ def main_driver():
 
     elif autochange is not None and (autochange + 60) < time.time():
       autochange = time.time()
+      print("Updating autochange time on mode change")
  
       if modeset:
         mode_list = dynamic_modes
