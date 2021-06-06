@@ -812,8 +812,11 @@ def firefly():
         pixels[n] = (0,0,0)
         if n >= 1 and phase[n-1] >= 10 and phase[n-1] <= 25: # negative neighbour alive
           phase[n] += 1
-        if n < configuration.num_leds - 1 and phase[n+1] >= 10 and phase[n+1] <= 25: # positive  neighbour alive
+        elif n < configuration.num_leds - 1 and phase[n+1] >= 10 and phase[n+1] <= 25: # positive  neighbour alive
           phase[n] += 1
+        elif phase[n] > 0:
+          phase[n] -= 1  # reduce stored intensity if no stimulus
+
       elif phase[n] >= 10:  # stepping through the activated sequence
         if phase[n] <= 20:
           pixels[n] = (0,255,0) # TODO: proceed through sequence
