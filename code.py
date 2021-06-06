@@ -15,7 +15,14 @@ rotary_encoder = rotaryio.IncrementalEncoder(board.GP9, board.GP10)
 rotary_button = digitalio.DigitalInOut(board.GP22)
 rotary_button.switch_to_input(pull = digitalio.Pull.UP)
 
-static_modes = [jar.rgb1, partial(jar.solid, 255, 0, 0)]
+static_modes = [jar.rgb1,
+                partial(jar.solid, 255, 0, 0),
+                partial(jar.solid, 128, 128, 0),
+                partial(jar.solid, 0, 255, 0),
+                partial(jar.solid, 0, 128, 128),
+                partial(jar.solid, 0, 0, 255),
+                partial(jar.solid, 128, 0, 128)
+               ]
 
 dynamic_modes = [jar.pixphase1, jar.huespin6, jar.huespin5, jar.huespin4, jar.huespin3, jar.huespin2, jar.rainbow1, jar.drip1, jar.huespin1, jar.centre1, jar.vert1, jar.vert2, jar.threepart1, jar.primaryswitcher1, jar.phase4, jar.primaryswitcher2, jar.contr2, jar.phase1, jar.fountain1, jar.contr3]
 
