@@ -815,8 +815,18 @@ def firefly():
         if n < configuration.num_leds - 1 and phase[n+1] >= 10 and phase[n+1] <= 25: # positive  neighbour alive
           phase[n] += 1
       elif phase[n] >= 10:  # stepping through the activated sequence
-        if phase[n] <= 25:
+        if phase[n] <= 20:
           pixels[n] = (0,255,0) # TODO: proceed through sequence
+        elif phase[n] <= 25:
+          pixels[n] = (64,64,0) # TODO: proceed through sequence
+        elif phase[n] <= 26:
+          pixels[n] = (32,16,0) # TODO: proceed through sequence
+        elif phase[n] <= 27:
+          pixels[n] = (16,4,0) # TODO: proceed through sequence
+        elif phase[n] <= 28:
+          pixels[n] = (8,0,0) # TODO: proceed through sequence
+        elif phase[n] <= 29:
+          pixels[n] = (4,0,0) # TODO: proceed through sequence
         else: 
           pixels[n] = (0,0,0) # TODO: proceed through sequence
         phase[n] += 1
