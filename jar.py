@@ -8,6 +8,7 @@ import configuration
 
 pixels = neopixel.NeoPixel(configuration.neopixel_pin, configuration.num_leds, auto_write=False)
 
+tau = math.pi * 2.0
 
 def nightlight():
   for n in range(0, configuration.num_leds):
@@ -19,9 +20,9 @@ def nightlight():
 
 
 def contrasts(phase):
-  tri = 6.28 / 3.0
-  p_phase = phase * 6.28
-  p2_phase = (phase + 0.5) * 6.28
+  tri = tau / 3.0
+  p_phase = phase * tau
+  p2_phase = (phase + 0.5) * tau
   r = norm(math.sin(p_phase + tri))
   g = norm(math.sin(p_phase - tri))
   b = norm(math.sin(p_phase))
@@ -43,8 +44,8 @@ def contrasts(phase):
 
 
 def solid_saturated(phase):
-  tri = 6.28 / 3.0
-  p_phase = phase * 6.28
+  tri = tau / 3.0
+  p_phase = phase * tau
   r = norm(math.sin(p_phase + tri))
   g = norm(math.sin(p_phase - tri))
   b = norm(math.sin(p_phase))
@@ -69,8 +70,8 @@ def static_random():
 
 def static_saturated_random():
   for n in range(0, configuration.num_leds):
-    tri = 6.28 / 3.0
-    p_phase = random.random() * 6.28
+    tri = tau / 3.0
+    p_phase = random.random() * tau
     r = norm(math.sin(p_phase + tri))
     g = norm(math.sin(p_phase - tri))
     b = norm(math.sin(p_phase))
@@ -81,9 +82,9 @@ def static_saturated_random():
 
 def static_saturated_rainbow():
   for n in range(0, configuration.num_leds):
-    tri = 6.28 / 3.0
+    tri = tau / 3.0
     frac = float(n) / float(configuration.num_leds)
-    p_phase = frac * 6.28
+    p_phase = frac * tau
     r = norm(math.sin(p_phase + tri))
     g = norm(math.sin(p_phase - tri))
     b = norm(math.sin(p_phase))
@@ -96,9 +97,9 @@ def static_saturated_rainbow():
 def static_saturated_magnified_rainbow(p_off):
 
   for n in range(0, configuration.num_leds):
-    tri = 6.28 / 3.0
+    tri = tau / 3.0
     frac = float(n) / float(configuration.num_leds)
-    p_phase = (frac / 3.0 + p_off) * 6.28
+    p_phase = (frac / 3.0 + p_off) * tau
     r = norm(math.sin(p_phase + tri))
     g = norm(math.sin(p_phase - tri))
     b = norm(math.sin(p_phase))
@@ -135,7 +136,7 @@ def pixphase1():
 
   while True:
     for n in range(0, configuration.num_leds):
-      p_phase = phases[n] * 6.28
+      p_phase = phases[n] * tau
       r = norm(math.sin(p_phase))
       g = norm(math.sin(p_phase))
       b = norm(math.sin(p_phase))
@@ -514,11 +515,11 @@ def phase1():
     c = 0
 
     delay = 0.01
-    step = 6.28 * 0.01
+    step = tau * 0.01
     while True:
         pixels.fill( (0,0,0) )
         for n in range(0, configuration.num_leds):
-            p_phase = (n / float(configuration.num_leds)) * 6.28
+            p_phase = (n / float(configuration.num_leds)) * tau
             r = norm(math.sin(c + p_phase))
             g = norm(math.sin(c + p_phase))
             b = norm(math.sin(c + p_phase))
@@ -537,14 +538,14 @@ def phase2():
     c = 0
 
     delay = 0.01
-    step = 6.28 * 0.01
+    step = tau * 0.01
     while True:
         pixels.fill( (0,0,0) )
         for n in range(0, configuration.num_leds):
-            p_phase = (n / float(configuration.num_leds)) * 6.28
+            p_phase = (n / float(configuration.num_leds)) * tau
             r = norm(math.sin(c + p_phase + 0))
-            g = norm(math.sin(c + p_phase + 6.28/3.0))
-            b = norm(math.sin(c + p_phase + 6.28/3.0*2.0))
+            g = norm(math.sin(c + p_phase + tau/3.0))
+            b = norm(math.sin(c + p_phase + tau/3.0*2.0))
             pixels[n] = (r, g, b)
         pixels.show()
         time.sleep(delay)
@@ -562,19 +563,19 @@ def phase3():
     d = 0
 
     delay = 0.01
-    c_step = 6.28 * 0.01
-    d_step = 6.28 * 0.001
+    c_step = tau * 0.01
+    d_step = tau * 0.001
     while True:
         pixels.fill( (0,0,0) )
         # mag = 0.5 + 0.5 * math.sin(d + p_phase)
         r_mag = 0.5 + 0.5 * math.sin(d)
-        g_mag = 0.5 + 0.5 * math.sin(d + 6.28/3.0)
-        b_mag = 0.5 + 0.5 * math.sin(d + 6.28/2.0)
+        g_mag = 0.5 + 0.5 * math.sin(d + tau/3.0)
+        b_mag = 0.5 + 0.5 * math.sin(d + tau/2.0)
         for n in range(0, configuration.num_leds):
-            p_phase = (n / float(configuration.num_leds)) * 6.28
+            p_phase = (n / float(configuration.num_leds)) * tau
             r = norm(r_mag * math.sin(c + p_phase + 0))
-            g = norm(g_mag * math.sin(c + p_phase + 6.28/3.0))
-            b = norm(b_mag * math.sin(c + p_phase + 6.28/3.0*2.0))
+            g = norm(g_mag * math.sin(c + p_phase + tau/3.0))
+            b = norm(b_mag * math.sin(c + p_phase + tau/3.0*2.0))
             pixels[n] = (r, g, b)
         pixels.show()
         time.sleep(delay)
@@ -585,14 +586,14 @@ def phase4():
     c = 0
 
     delay = 0.01
-    step = 6.28 * 0.01
+    step = tau * 0.01
     while True:
         pixels.fill( (0,0,0) )
         for n in range(0, configuration.num_leds):
-            p_phase = (n / float(configuration.num_leds)) * 6.28
+            p_phase = (n / float(configuration.num_leds)) * tau
             r = norm(math.sin(c + p_phase + 0))
-            g = norm(math.sin(c * 1.07 + p_phase + 6.28/3.0))
-            b = norm(math.sin(c * (-1.11) + p_phase + 6.28/3.0*2.0))
+            g = norm(math.sin(c * 1.07 + p_phase + tau/3.0))
+            b = norm(math.sin(c * (-1.11) + p_phase + tau/3.0*2.0))
             pixels[n] = (r, g, b)
         pixels.show()
         yield delay
@@ -617,10 +618,10 @@ def phase5():
         # print(f"ga = {ga}")
         pixels.fill( (0,0,0) )
         for n in range(0, configuration.num_leds):
-            p_phase = (n / float(configuration.num_leds)) * 6.28
+            p_phase = (n / float(configuration.num_leds)) * tau
             r = norm(math.sin(p_phase + 0), ga)
-            g = norm(math.sin(p_phase + 6.28/3.0), ga)
-            b = norm(math.sin(p_phase + 6.28/3.0*2.0), ga)
+            g = norm(math.sin(p_phase + tau/3.0), ga)
+            b = norm(math.sin(p_phase + tau/3.0*2.0), ga)
             pixels[n] = (r, g, b)
         pixels.show()
         time.sleep(delay)
@@ -873,8 +874,8 @@ def firefly_blue_blip(phase):
 
 def firefly_rainbow(phase):
 
-  tri = 6.28 / 3.0
-  p_phase = float(phase)/30.0 * 6.28
+  tri = tau / 3.0
+  p_phase = float(phase)/30.0 * tau
   r = norm(math.sin(p_phase + tri))
   g = norm(math.sin(p_phase - tri))
   b = norm(math.sin(p_phase))
