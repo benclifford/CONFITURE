@@ -18,6 +18,29 @@ def nightlight():
     yield 0.1
 
 
+def contrasts(phase):
+  tri = 6.28 / 3.0
+  p_phase = phase * 6.28
+  p2_phase = (phase + 0.5) * 6.28
+  r = norm(math.sin(p_phase + tri))
+  g = norm(math.sin(p_phase - tri))
+  b = norm(math.sin(p_phase))
+
+  r2 = norm(math.sin(p2_phase + tri))
+  g2 = norm(math.sin(p2_phase - tri))
+  b2 = norm(math.sin(p2_phase))
+
+  for n in range(0, configuration.num_leds):
+    if n % 2 == 0:
+      pixels[n] = (r,g,b)
+    else:
+      pixels[n] = (r2,g2,b2)
+
+  while True:
+    pixels.show()
+    yield 0.1
+
+
 
 def solid_saturated(phase):
   tri = 6.28 / 3.0
