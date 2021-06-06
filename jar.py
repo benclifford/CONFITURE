@@ -4,19 +4,22 @@ import random
 import time
 import math
 
+import configuration
+
 # pixels = neopixel.NeoPixel(board.GP13, 49, auto_write=False)
-pixels = neopixel.NeoPixel(board.GP18, 50, auto_write=False)
+
+pixels = neopixel.NeoPixel(configuration.neopixel_pin, configuration.num_leds, auto_write=False)
 
 
 def pixphase1():
-  phases = [0] * 49
-  phase_shifts = [0.01] * 49
-  for n in range(0,49):
+  phases = [0] * configuration.num_leds 
+  phase_shifts = [0.01] * configuration.num_leds
+  for n in range(0,configuration.num_leds):
     phases[n] = random.random()
     phase_shifts[n] += random.random() * 0.01
 
   while True:
-    for n in range(0, 49):
+    for n in range(0, configuration.num_leds):
       p_phase = phases[n] * 6.28
       r = norm(math.sin(p_phase))
       g = norm(math.sin(p_phase))
@@ -34,7 +37,7 @@ def rainbow1():
 
   base = 0
   while True:
-    for n in range(0,49):
+    for n in range(0,configuration.num_leds):
       v = 1 + (base + n) % 6 # cycle through 1..6
       if v & 1 == 0:
         r = 255
@@ -69,7 +72,7 @@ def drip1():
     for n in range(0, 3):
       pixels[n] = rgb
     
-    for n in range(46, 49):
+    for n in range(46, configuration.num_leds):
       pixels[n] = rgb
 
     pixels.show()
@@ -121,7 +124,7 @@ def huespin3():
   hue = random.random()
   while True:
 
-    for n in range(0,49):
+    for n in range(0,configuration.num_leds):
       (r,g,b) = pixels[n]
       pixels[n] = (r * 2/3, g * 2/3, b * 2/3)
 
@@ -183,7 +186,7 @@ def huespin5():
   while True:
     hue = (hue + 0.2 + random.random() * 0.5)
     rgb = hue_saturated2(hue)
-    for n in range(0,49):
+    for n in range(0,configuration.num_leds):
         pixels[n] = rgb
         pixels.show()
         time.sleep(0.03)
@@ -201,7 +204,7 @@ def huespin5():
 def huespin6():
   hue = random.random()
   while True:
-    for n in range(0,49):
+    for n in range(0,configuration.num_leds):
       rgb = hue_saturated2(hue + random.random() * 0.25, v = random.random() * 0.5 + 0.5)
       pixels[n] = rgb
     pixels.show()
@@ -235,7 +238,7 @@ def contr2():
   while True:
     col = hue_saturated(hue)
     contr = hue_saturated((hue + 0.5) % 1)
-    for n in range(0, 49):
+    for n in range(0, configuration.num_leds):
       if random.random() > 0.5:
         pixels[n] = col
       else:
@@ -272,7 +275,7 @@ def contr3():
 def flame1():
     while True:
         pixels.fill( (0,0,0) )
-        for n in range(0, 49):
+        for n in range(0, configuration.num_leds):
             if random.random() > (48-n)/48.0:
                 yc  = int(255.0 * gamma(n/48.0))
                 pixels[n] = (255, yc, 0)
@@ -283,7 +286,7 @@ def flame1():
 def flame2():
 
     c = 0
-    heat = [0] * 49
+    heat = [0] * configuration.num_leds
 
     start_heat = 1.0
 
@@ -291,9 +294,9 @@ def flame2():
 
         heat[0] = start_heat
 
-        new_heat = [0] * 49
+        new_heat = [0] * configuration.num_leds
 
-        for n in range(0,49):
+        for n in range(0,configuration.num_leds):
             k = 0.30 + random.random() * 0.03
             k2 = 0.10 + random.random() * 0.03
 
@@ -308,7 +311,7 @@ def flame2():
         heat = new_heat
 
 
-        for n in range(0,49):
+        for n in range(0,configuration.num_leds):
             h = heat[n]
 
 
@@ -343,7 +346,7 @@ def flame2():
 def flame3():
 
     c = 0
-    heat = [0] * 49
+    heat = [0] * configuration.num_leds
 
     start_heat = 1.0
 
@@ -353,7 +356,7 @@ def flame3():
             hpix = random.randrange(0,15)
             heat[hpix] = max(0.0, min(1.0, heat[hpix] + random.random() * 0.7 - 0.1))
 
-        new_heat = [0] * 49
+        new_heat = [0] * configuration.num_leds
 
         for n in range(0,48):
 
@@ -371,7 +374,7 @@ def flame3():
         heat = new_heat
 
 
-        for n in range(0,49):
+        for n in range(0,configuration.num_leds):
             h = heat[n]
 
 
@@ -418,8 +421,8 @@ def phase1():
     step = 6.28 * 0.01
     while True:
         pixels.fill( (0,0,0) )
-        for n in range(0, 49):
-            p_phase = (n / 49.0) * 6.28
+        for n in range(0, configuration.num_leds):
+            p_phase = (n / float(configuration.num_leds)) * 6.28
             r = norm(math.sin(c + p_phase))
             g = norm(math.sin(c + p_phase))
             b = norm(math.sin(c + p_phase))
@@ -442,8 +445,8 @@ def phase2():
     step = 6.28 * 0.01
     while True:
         pixels.fill( (0,0,0) )
-        for n in range(0, 49):
-            p_phase = (n / 49.0) * 6.28
+        for n in range(0, configuration.num_leds):
+            p_phase = (n / float(configuration.num_leds)) * 6.28
             r = norm(math.sin(c + p_phase + 0))
             g = norm(math.sin(c + p_phase + 6.28/3.0))
             b = norm(math.sin(c + p_phase + 6.28/3.0*2.0))
@@ -472,8 +475,8 @@ def phase3():
         r_mag = 0.5 + 0.5 * math.sin(d)
         g_mag = 0.5 + 0.5 * math.sin(d + 6.28/3.0)
         b_mag = 0.5 + 0.5 * math.sin(d + 6.28/2.0)
-        for n in range(0, 49):
-            p_phase = (n / 49.0) * 6.28
+        for n in range(0, configuration.num_leds):
+            p_phase = (n / float(configuration.num_leds)) * 6.28
             r = norm(r_mag * math.sin(c + p_phase + 0))
             g = norm(g_mag * math.sin(c + p_phase + 6.28/3.0))
             b = norm(b_mag * math.sin(c + p_phase + 6.28/3.0*2.0))
@@ -490,8 +493,8 @@ def phase4():
     step = 6.28 * 0.01
     while True:
         pixels.fill( (0,0,0) )
-        for n in range(0, 49):
-            p_phase = (n / 49.0) * 6.28
+        for n in range(0, configuration.num_leds):
+            p_phase = (n / float(configuration.num_leds)) * 6.28
             r = norm(math.sin(c + p_phase + 0))
             g = norm(math.sin(c * 1.07 + p_phase + 6.28/3.0))
             b = norm(math.sin(c * (-1.11) + p_phase + 6.28/3.0*2.0))
@@ -519,8 +522,8 @@ def phase5():
         ga = 0.5 + c % 4
         # print(f"ga = {ga}")
         pixels.fill( (0,0,0) )
-        for n in range(0, 49):
-            p_phase = (n / 49.0) * 6.28
+        for n in range(0, configuration.num_leds):
+            p_phase = (n / float(configuration.num_leds)) * 6.28
             r = norm(math.sin(p_phase + 0), ga)
             g = norm(math.sin(p_phase + 6.28/3.0), ga)
             b = norm(math.sin(p_phase + 6.28/3.0*2.0), ga)
@@ -563,7 +566,7 @@ def strobe2():
 
 
     pixels.fill( (0,0,0) )
-    for led in range(32,49):
+    for led in range(32,configuration.num_leds):
         pixels[led] = (255, 0, 0)
 
     while True:
@@ -575,7 +578,7 @@ def strobe2():
 
 
 def rgb1():
-    for n in range(0,49):
+    for n in range(0,configuration.num_leds):
         if n%3 == 0:
             pixels[n] = (255,0,0)
         elif n%3 == 1:
@@ -600,7 +603,7 @@ def primaryswitcher1():
         # around the circle
         hue = (hue + 0.2 + random.random() * 0.6) % 1.0
         col = hue_saturated(hue)
-        for n in range(0,49):
+        for n in range(0,configuration.num_leds):
             pixels[n] = col
             pixels.show()
             time.sleep(0.01) # about half a second to fill
@@ -611,7 +614,7 @@ def primaryswitcher1():
             time.sleep(0.2)
             yield
 
-        for n in range(0,49):
+        for n in range(0,configuration.num_leds):
             pixels[48-n] = (0,0,0)
             pixels.show()
             time.sleep(0.01) # about half a second to fill
@@ -630,7 +633,7 @@ def primaryswitcher2():
         # around the circle
         hue = (hue + 0.25 + random.random() * 0.5) % 1.0
         col = hue_saturated(hue)
-        for n in range(0,49):
+        for n in range(0,configuration.num_leds):
             pixels[n] = col
             pixels.show()
             time.sleep(0.005)
@@ -638,7 +641,7 @@ def primaryswitcher2():
 
 
 def fountain1():
-    pix = [None] * 49
+    pix = [None] * configuration.num_leds
     pixels.fill( (0,0,0) )
     pixels.show()
 
@@ -648,7 +651,7 @@ def fountain1():
                        int(math.pow(2, random.randint(0,7))),
                        int(math.pow(2, random.randint(0,7))))
         # print("==")
-        for n in range(0, 49):
+        for n in range(0, configuration.num_leds):
             d = random.randint(0,2)
             nd = n - d
             k = pix[n]
@@ -659,7 +662,7 @@ def fountain1():
                 pix[n] = k # put the pixel back unmoved
             # else it falls off the end and we don't set anything
 
-        for n in range(0,49):
+        for n in range(0,configuration.num_leds):
             if pix[n] is None:
                 pixels[n] = (0,0,0)
             else:
@@ -706,12 +709,12 @@ def vert1():
 
     while True:
 
-        base = random.randint(0,49)
+        base = random.randint(0,configuration.num_leds)
 
-        rgb = hue_saturated(base / 49.0)
+        rgb = hue_saturated(base / float(configuration.num_leds))
 
         for p in range(base, base+8):
-            pixels[p % 49] = rgb
+            pixels[p % configuration.num_leds] = rgb
 
         pixels.show()
         time.sleep(0.1)
@@ -721,17 +724,17 @@ def vert1():
 
 
 def vert2():
-    base = random.randint(0,49)
+    base = random.randint(0,configuration.num_leds)
 
     while True:
 
         pixels.fill( (0,0,0) )
-        base = (base + random.randint(-1,1)) % 49
+        base = (base + random.randint(-1,1)) % configuration.num_leds
 
-        rgb = hue_saturated(base / 49.0)
+        rgb = hue_saturated(base / float(configuration.num_leds))
 
         for p in range(base, base+8):
-            pixels[p % 49] = rgb
+            pixels[p % configuration.num_leds] = rgb
 
         pixels.show()
         time.sleep(0.01)
