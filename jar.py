@@ -799,9 +799,42 @@ def firefly_green_red(phase):
   else: 
     return (0,0,0)
 
-def firefly():
+def firefly_orange_pulse(phase):
+  if phase <= 9:
+    return (0,0,0)
+  elif phase <= 11:
+    return (64,16,0)
+  elif phase <= 13:
+    return (128,32,0)
+  elif phase <= 15:
+    return (255,64,0)
+  elif phase <= 17:
+    return (128,32,0)
+  elif phase <= 19:
+    return (64,16,0)
+  else:
+    return (0,0,0)
 
-  led_function = firefly_green_red
+def firefly_blue_blip(phase):
+  if phase <= 9:
+    return (0,0,0)
+  elif phase <= 11:
+    return (0,0,255)
+  else:
+    return (0,0,0)
+
+def firefly_rainbow(phase):
+
+  tri = 6.28 / 3.0
+  p_phase = float(phase)/30.0 * 6.28
+  r = norm(math.sin(p_phase + tri))
+  g = norm(math.sin(p_phase - tri))
+  b = norm(math.sin(p_phase))
+
+  return (r,g,b)
+  
+
+def firefly(led_function):
 
   pixels.fill( (0,0,0) )
   pixels.show()
