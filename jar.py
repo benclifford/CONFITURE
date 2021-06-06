@@ -779,6 +779,52 @@ def vert2():
         yield 0.01
 
 
+def firefly():
+
+  pixels.fill( (0,0,0) )
+  pixels.show()
+
+  phase = [0] * configuration.num_leds
+  phase[25] = 10
+
+  ctr = 0
+
+  while True:
+    ctr = ctr + 1
+    if ctr > 50:
+        n = random.randint(0,configuration.num_leds-1)
+        if phase[n] < 10:
+            phase[n] = 10   # only fire if we're in accumulating mode
+        ctr = 0
+
+    # phase is an integer that ticks up:
+    # 0 - 10: pixel has observed neighbours have brightness
+    # and is accumulating fire
+    # 10-30: pixel has fired and is walking through its colour/cooling sequence
+
+    
+    # time.sleep(1)
+    # print("")
+    for n in range(0, configuration.num_leds):
+      # print(f"pixel {n}={phase[n]}  ", end='')
+
+      if phase[n] < 10:
+        pixels[n] = (0,0,0)
+        if n >= 1 and phase[n-1] >= 10 and phase[n-1] <= 25: # negative neighbour alive
+          phase[n] += 1
+        if n < configuration.num_leds - 1 and phase[n+1] >= 10 and phase[n+1] <= 25: # positive  neighbour alive
+          phase[n] += 1
+      elif phase[n] >= 10:  # stepping through the activated sequence
+        if phase[n] <= 25:
+          pixels[n] = (0,255,0) # TODO: proceed through sequence
+        else: 
+          pixels[n] = (0,0,0) # TODO: proceed through sequence
+        phase[n] += 1
+        if phase[n] > 30:
+          phase[n] = 0
+    pixels.show()
+    yield 0.02
+
 def gamma(x):
     return math.pow(x, 2.3)
 
