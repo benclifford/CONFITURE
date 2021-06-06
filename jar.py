@@ -17,6 +17,33 @@ def solid(r,g,b):
     time.sleep(0.1)
     yield
 
+
+def static_random():
+  for n in range(0, configuration.num_leds):
+    r = norm2(2.0 * random.random())
+    g = norm2(2.0 * random.random())
+    b = norm2(2.0 * random.random())
+    pixels[n] = (r,g,b)
+  while True:
+    pixels.show()
+    time.sleep(0.1)
+    yield
+
+def static_saturated_random():
+  for n in range(0, configuration.num_leds):
+    tri = 6.28 / 3.0
+    p_phase = random.random() * 6.28
+    r = norm(math.sin(p_phase + tri))
+    g = norm(math.sin(p_phase - tri))
+    b = norm(math.sin(p_phase))
+    pixels[n] = (r,g,b)
+  while True:
+    pixels.show()
+    time.sleep(0.1)
+    yield
+
+
+
 def pixphase1():
   phases = [0] * configuration.num_leds 
   phase_shifts = [0.01] * configuration.num_leds
