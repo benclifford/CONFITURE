@@ -53,10 +53,19 @@ def static_saturated_rainbow():
     yield 0.1
 
 
-def static_white_every_n(n):
+
+def static_white_dither(frac):
   pixels.fill( (0,0,0) )
-  for p in range(0, configuration.num_leds,n):
-    pixels[p] = (255,255,255)
+
+  intensity = 0.0
+
+  for p in range(0, configuration.num_leds):
+    intensity = intensity + frac
+
+    if intensity > 0.5:
+      pixels[p] = (255,255,255)
+      intensity = intensity - 1.0
+
   while True:
     pixels.show()
     yield 0.1
