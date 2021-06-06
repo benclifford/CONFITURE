@@ -42,6 +42,20 @@ def static_saturated_random():
     time.sleep(0.1)
     yield
 
+def static_saturated_rainbow():
+  for n in range(0, configuration.num_leds):
+    tri = 6.28 / 3.0
+    frac = float(n) / float(configuration.num_leds)
+    p_phase = frac * 6.28
+    r = norm(math.sin(p_phase + tri))
+    g = norm(math.sin(p_phase - tri))
+    b = norm(math.sin(p_phase))
+    pixels[n] = (r,g,b)
+  while True:
+    pixels.show()
+    time.sleep(0.1)
+    yield
+
 
 
 def pixphase1():
