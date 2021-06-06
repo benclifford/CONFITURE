@@ -15,33 +15,22 @@ rotary_encoder = rotaryio.IncrementalEncoder(board.GP9, board.GP10)
 rotary_button = digitalio.DigitalInOut(board.GP22)
 rotary_button.switch_to_input(pull = digitalio.Pull.UP)
 
+
+def partial_by_range(func, start, end, step):
+  l = []
+  v = start
+  while v < end:
+    l.append(partial(func, v))
+    v += step
+  return l
+
+
 static_modes = [jar.rgb1,
-                partial(jar.solid_saturated, 0),
-                partial(jar.solid_saturated, 0.0833),
-                partial(jar.solid_saturated, 0.1666),
-                partial(jar.solid_saturated, 0.25),
-                partial(jar.solid_saturated, 0.3333),
-                partial(jar.solid_saturated, 0.4165),
-                partial(jar.solid_saturated, 0.5),
-                partial(jar.solid_saturated, 0.5831),
-                partial(jar.solid_saturated, 0.6666),
-                partial(jar.solid_saturated, 0.75),
-                partial(jar.solid_saturated, 0.8333),
-                partial(jar.solid_saturated, 0.9166),
-                jar.static_random,
-                jar.static_saturated_random,
-                jar.static_saturated_rainbow,
-                partial(jar.static_white_dither, 0.1),
-                partial(jar.static_white_dither, 0.2),
-                partial(jar.static_white_dither, 0.3),
-                partial(jar.static_white_dither, 0.4),
-                partial(jar.static_white_dither, 0.5),
-                partial(jar.static_white_dither, 0.6),
-                partial(jar.static_white_dither, 0.7),
-                partial(jar.static_white_dither, 0.8),
-                partial(jar.static_white_dither, 0.9),
-                partial(jar.static_white_dither, 1.0)
-               ]
+               jar.static_random,
+               jar.static_saturated_random,
+               jar.static_saturated_rainbow] + \
+               partial_by_range(jar.solid_saturated, 0, 1, 0.04) + \
+               partial_by_range(jar.static_white_dither, 0, 1, 0.1)
 
 dynamic_modes = [jar.pixphase1, jar.huespin6, jar.huespin5, jar.huespin4, jar.huespin3, jar.huespin2, jar.rainbow1, jar.drip1, jar.huespin1, jar.centre1, jar.vert1, jar.vert2, jar.threepart1, jar.primaryswitcher1, jar.phase4, jar.primaryswitcher2, jar.contr2, jar.phase1, jar.fountain1, jar.contr3]
 
