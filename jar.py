@@ -263,7 +263,8 @@ def huespin4():
         pixels.show()
         yield 0.03
 
-    yield 1
+    for n in range(0,9):
+      yield 0.1
 
 
 def huespin5():
@@ -281,7 +282,8 @@ def huespin5():
         pixels.show()
         yield 0.03
 
-    yield 1
+    for n in range(0,9):
+      yield 0.1
 
 
 def huespin5():
@@ -346,7 +348,10 @@ def contr2():
     pixels.show()
 
     hue = (hue + 0.01) % 1.0
-    yield 1
+
+    for n in range(0,9):
+      yield 0.1
+
 
 def contr3():
   hue = random.random()
