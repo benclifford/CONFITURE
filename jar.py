@@ -218,7 +218,7 @@ def huespin2():
   pixels.fill( (0,0,0) )
   hue = random.random()
   while True:
-    n = random.randint(0,48)
+    n = random.randint(0, configuration.num_leds - 1)
     rgb = hue_saturated((hue + random.random() * 0.3) % 1.0)
     pixels[n] = rgb
     pixels.show()
@@ -238,7 +238,7 @@ def huespin3():
       (r,g,b) = pixels[n]
       pixels[n] = (r * 2/3, g * 2/3, b * 2/3)
 
-    n = random.randint(0,48)
+    n = random.randint(0,configuration.num_leds - 1)
     rgb = hue_saturated((hue + random.random() * 0.3) % 1.0)
     pixels[n] = rgb
     pixels.show()
@@ -353,7 +353,7 @@ def contr3():
   while True:
     col = hue_saturated(hue)
     contr = hue_saturated((hue + 0.5) % 1)
-    pixel = random.randint(0,48)
+    pixel = random.randint(0,configuration.num_leds - 1)
     state = random.randint(0,3)
 
     if state == 0:
@@ -368,17 +368,6 @@ def contr3():
     hue = (hue + 0.0001) % 1.0
     yield 0.01
 
-
-def flame1():
-    while True:
-        pixels.fill( (0,0,0) )
-        for n in range(0, configuration.num_leds):
-            if random.random() > (48-n)/48.0:
-                yc  = int(255.0 * gamma(n/48.0))
-                pixels[n] = (255, yc, 0)
-            # else leave blank
-        pixels.show()
-        time.sleep(1)
 
 def flame2():
 
@@ -433,7 +422,7 @@ def flame2():
                  g = 255
                  b = 255
 
-            pixels[48-n] = (r,g,b)
+            pixels[configuration.num_leds - 1-n] = (r,g,b)
 
         pixels.show()
         time.sleep(0.1)
@@ -455,7 +444,7 @@ def flame3():
 
         new_heat = [0] * configuration.num_leds
 
-        for n in range(0,48):
+        for n in range(0,configuration.num_leds - 1):
 
             t = 0
             if n > 0:
@@ -496,7 +485,7 @@ def flame3():
                  g = 255
                  b = 255
 
-            pixels[48-n] = (r,g,b)
+            pixels[configuration.num_leds - 1-n] = (r,g,b)
 
         pixels.show()
         time.sleep(0.05)
@@ -707,7 +696,7 @@ def primaryswitcher1():
             yield 0.2
 
         for n in range(0,configuration.num_leds):
-            pixels[48-n] = (0,0,0)
+            pixels[configuration.num_leds - 1-n] = (0,0,0)
             pixels.show()
             yield 0.01
 
@@ -737,7 +726,7 @@ def fountain1():
 
     while True:
         if random.randint(0,4) == 0:
-            pix[48] = (int(math.pow(2, random.randint(0,7))),
+            pix[configuration.num_leds - 1] = (int(math.pow(2, random.randint(0,7))),
                        int(math.pow(2, random.randint(0,7))),
                        int(math.pow(2, random.randint(0,7))))
         # print("==")
