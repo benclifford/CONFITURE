@@ -1,0 +1,207 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:Rotary_Encoder_Switch SW1
+U 1 1 60BF5305
+P 1850 2900
+F 0 "SW1" H 1850 3267 50  0000 C CNN
+F 1 "Rotary_Encoder_Switch" H 1850 3176 50  0000 C CNN
+F 2 "Rotary_Encoder:RotaryEncoder_Alps_EC11E-Switch_Vertical_H20mm" H 1700 3060 50  0001 C CNN
+F 3 "~" H 1850 3160 50  0001 C CNN
+	1    1850 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_SPDT SW2
+U 1 1 60BF69ED
+P 6250 2050
+F 0 "SW2" H 6250 2335 50  0000 C CNN
+F 1 "SW_SPDT" H 6250 2244 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 6250 2050 50  0001 C CNN
+F 3 "~" H 6250 2050 50  0001 C CNN
+	1    6250 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x03 J4
+U 1 1 60BF7505
+P 9250 3200
+F 0 "J4" H 9330 3242 50  0000 L CNN
+F 1 "Screw_Terminal_01x03" H 9330 3151 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 9250 3200 50  0001 C CNN
+F 3 "~" H 9250 3200 50  0001 C CNN
+	1    9250 3200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D D1
+U 1 1 60BF9A5A
+P 3000 3950
+F 0 "D1" H 3000 4167 50  0000 C CNN
+F 1 "D" H 3000 4076 50  0000 C CNN
+F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 3000 3950 50  0001 C CNN
+F 3 "~" H 3000 3950 50  0001 C CNN
+	1    3000 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x20_Female J1
+U 1 1 60BFE91E
+P 1350 6000
+F 0 "J1" H 1378 5976 50  0000 L CNN
+F 1 "Pins 1-20" H 1378 5885 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x20_P2.54mm_Vertical" H 1350 6000 50  0001 C CNN
+F 3 "~" H 1350 6000 50  0001 C CNN
+	1    1350 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x20_Female J2
+U 1 1 60BFFC1A
+P 3850 6150
+F 0 "J2" H 3878 6126 50  0000 L CNN
+F 1 "Pins 40-21 (reverse counting)" H 3878 6035 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x20_P2.54mm_Vertical" H 3850 6150 50  0001 C CNN
+F 3 "~" H 3850 6150 50  0001 C CNN
+	1    3850 6150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2850 5350 2850 3950
+Wire Wire Line
+	3650 5350 2850 5350
+Wire Wire Line
+	3150 1950 3150 3950
+Wire Wire Line
+	9050 3100 9050 1950
+Wire Wire Line
+	3150 1950 6450 1950
+Connection ~ 6450 1950
+Wire Wire Line
+	6450 1950 9050 1950
+Wire Wire Line
+	9050 3300 9050 4450
+Wire Wire Line
+	9050 4450 6700 4450
+Wire Wire Line
+	2150 3150 2150 3000
+Wire Wire Line
+	2150 3150 900  3150
+Wire Wire Line
+	900  3150 900  2850
+Wire Wire Line
+	900  2850 1150 2850
+Connection ~ 2150 3150
+Wire Wire Line
+	1550 2900 1150 2900
+Wire Wire Line
+	1150 2900 1150 2850
+Wire Wire Line
+	6700 5500 4600 5500
+Wire Wire Line
+	4600 5500 4600 5450
+Wire Wire Line
+	2150 3150 4400 3150
+Wire Wire Line
+	6700 4450 6700 5500
+Wire Wire Line
+	3650 5450 4600 5450
+Connection ~ 4600 5450
+Wire Wire Line
+	4600 5450 4600 3150
+Wire Wire Line
+	1150 6700 6250 6700
+Wire Wire Line
+	6250 6700 6250 6050
+Wire Wire Line
+	6250 6050 8300 6050
+Wire Wire Line
+	8300 6050 8300 3200
+Wire Wire Line
+	8300 3200 9050 3200
+Wire Wire Line
+	1550 3000 1550 4900
+Wire Wire Line
+	1550 4900 1050 4900
+Wire Wire Line
+	1050 4900 1050 6200
+Wire Wire Line
+	1050 6200 1150 6200
+Wire Wire Line
+	1550 2800 1350 2800
+Wire Wire Line
+	1350 2800 1350 4700
+Wire Wire Line
+	1350 4700 850  4700
+Wire Wire Line
+	850  4700 850  6400
+Wire Wire Line
+	850  6400 1150 6400
+Wire Wire Line
+	2150 2800 2400 2800
+Wire Wire Line
+	2400 2800 2400 6350
+Wire Wire Line
+	2400 6350 3650 6350
+Wire Wire Line
+	4400 3150 4400 3000
+Wire Wire Line
+	4400 3000 5150 3000
+Connection ~ 4400 3150
+Wire Wire Line
+	4400 3150 4600 3150
+Wire Wire Line
+	5800 2700 7050 2700
+Wire Wire Line
+	7050 2700 7050 2050
+Wire Wire Line
+	5150 3000 5150 3750
+Wire Wire Line
+	5150 3750 5500 3750
+Wire Wire Line
+	5500 3750 5500 3300
+$Comp
+L Connector:Conn_01x02_Male J3
+U 1 1 60C6FF2F
+P 5650 3000
+F 0 "J3" H 5758 3181 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 5758 3090 50  0000 C CNN
+F 2 "kidcad-test:usb_micro_b_power_pp_benc" H 5650 3000 50  0001 C CNN
+F 3 "~" H 5650 3000 50  0001 C CNN
+	1    5650 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 3100 6400 3100
+Wire Wire Line
+	6400 3100 6400 2450
+Wire Wire Line
+	6400 2450 5800 2450
+Wire Wire Line
+	5800 2450 5800 2700
+Wire Wire Line
+	5850 3000 6000 3000
+Wire Wire Line
+	6000 3000 6000 3450
+Wire Wire Line
+	6000 3450 5550 3450
+Wire Wire Line
+	5550 3450 5550 3300
+Wire Wire Line
+	5550 3300 5500 3300
+Wire Wire Line
+	6050 2050 7050 2050
+$EndSCHEMATC
