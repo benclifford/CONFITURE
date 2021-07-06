@@ -10,3 +10,21 @@ running on a Pi Pico (RP2040).
 * NeoPixel LED string (I blew up the first pixel, so I've cut it off)
 * Adafruit CircuitPython 6.2.0-beta.4
 * Rotary encoder with push button
+
+
+## Confiture v3 board
+
+In kicad-test directory.
+
+This works.
+
+Problems to fix if I make v4:
+
+i) the mounting holes for USB connector are too small, so the connector
+rides a bit high and is not as securely connected as I want.
+
+ii) There is no facility for protective capacitor and resistor. This is
+fine for small battery powered projects, but it would be nice to have
+the option to add: for capacitor, this could be entirely optional points
+across the power bus. For the resistor, probably ok to make it compulsory
+with an option to use a direct link not a resistor when placing components.
