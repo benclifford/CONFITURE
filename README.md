@@ -16,6 +16,8 @@ running on a Pi Pico (RP2040).
 
 In kicad-test directory.
 
+Fabricated x3 by aisler.
+
 This works.
 
 Problems to fix if I make v4:
@@ -28,3 +30,6 @@ fine for small battery powered projects, but it would be nice to have
 the option to add: for capacitor, this could be entirely optional points
 across the power bus. For the resistor, probably ok to make it compulsory
 with an option to use a direct link not a resistor when placing components.
+
+iii) v. minor some of the writing is off the side of the board or
+hidden by components. This could all be tidied up.
