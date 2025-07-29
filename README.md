@@ -6,7 +6,7 @@ running on a Pi Pico (RP2040).
 ## Dramatis Personae
 
 * A jam jar, jam eaten, jar de-labelled and washed
-* Pi Pico
+* Pi Pico (original)
 * NeoPixel LED string (I blew up the first pixel, so I've cut it off)
 * Adafruit CircuitPython 9.2.8
 * Rotary encoder with push button
