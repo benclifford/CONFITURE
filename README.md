@@ -35,3 +35,12 @@ iii) v. minor some of the writing is off the side of the board or
 hidden by components. This could all be tidied up.
 
 iv) add cable tie strain relief hole
+
+## minicom
+
+To talk to micropython:
+
+minicom --device=/dev/ttyACM0 --baud=115200
+
+then press ctrl-C to interrupt and get a python prompt -- otherwise it
+sits there with no output as it runs the LEDs.
