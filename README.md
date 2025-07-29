@@ -33,3 +33,5 @@ with an option to use a direct link not a resistor when placing components.
 
 iii) v. minor some of the writing is off the side of the board or
 hidden by components. This could all be tidied up.
+
+iv) add cable tie strain relief hole
