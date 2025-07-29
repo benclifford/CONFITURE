@@ -138,8 +138,8 @@ def pixphase1():
     for n in range(0, configuration.num_leds):
       p_phase = phases[n] * tau
       r = norm(math.sin(p_phase))
-      g = norm(math.sin(p_phase))
-      b = norm(math.sin(p_phase))
+      g = int(  0.3 * norm(     math.sin(p_phase)   ))
+      b = 0
       pixels[n] = (r, g, b)
 
       phases[n] = (phases[n] + phase_shifts[n]) % 1.0
@@ -174,11 +174,6 @@ def rainbow1():
 
 
 def drip1():
-
-  # TODO: the border width of 3 at each end looks bad
-  # on 8 LEDs - it should be constrained to be a maximum
-  # portion of the LED strip, perhaps. eg max 1 LED for
-  # 8 LED strip.
   pixels.fill( (0,0,0) )
 
   hue = random.random()
@@ -191,7 +186,7 @@ def drip1():
     for n in range(0, 3):
       pixels[n] = rgb
     
-    for n in range(configuration.num_leds - 3, configuration.num_leds):
+    for n in range(46, configuration.num_leds):
       pixels[n] = rgb
 
     pixels.show()
@@ -200,7 +195,7 @@ def drip1():
     for n in range(0,9):
       yield 0.1
 
-    for n in range(3,configuration.num_leds - 3):
+    for n in range(3,46):
       pixels[n] = contr_rgb
       pixels.show()
       yield 0.01
@@ -323,19 +318,17 @@ def huespin6():
 
 
 def centre1():
-  max_width = int(configuration.num_leds / 4)
-  width =  int(max_width / 2)
-  centre = int(configuration.num_leds / 2)
+  width = 6
   while True:
     pixels.fill( (0,0,0) )
-    for p in range(centre - width, centre + width):
+    for p in range(24 - width, 24 + width):
       pixels[p] = (255, 255, 255)
     pixels.show()
 
     # TODO: random walk generator
     width += random.randint(-1,1)
-    if width > max_width:
-        width = max_width
+    if width > 12:
+        width = 12
     if width < 2:
         width = 2
     yield 0.02
@@ -766,7 +759,7 @@ def firefly(led_function):
   pixels.show()
 
   phase = [0] * configuration.num_leds
-  phase[int(configuration.num_leds/2)] = 10
+  phase[25] = 10
 
   ctr = 0
 
