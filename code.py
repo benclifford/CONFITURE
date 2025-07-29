@@ -11,9 +11,9 @@ from helpers import partial
 
 print("CONFITURE: jam jar executive")
 
-rotary_encoder = rotaryio.IncrementalEncoder(board.GP9, board.GP10)
+rotary_encoder = rotaryio.IncrementalEncoder(board.GP21, board.GP22)
 
-rotary_button = digitalio.DigitalInOut(board.GP22)
+rotary_button = digitalio.DigitalInOut(board.GP9)
 rotary_button.switch_to_input(pull = digitalio.Pull.UP)
 
 
