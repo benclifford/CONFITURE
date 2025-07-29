@@ -9,24 +9,27 @@
 `neopixel` - NeoPixel strip driver
 ====================================================
 
-* Author(s): Damien P. George, Scott Shawcroft, Carter Nelson, Roy Hooper
+* Author(s): Damien P. George, Scott Shawcroft, Carter Nelson, Rose Hooper
 """
 
-# pylint: disable=ungrouped-imports
 import sys
+
+import adafruit_pixelbuf
+import board
 import digitalio
 from neopixel_write import neopixel_write
 
-if sys.implementation.version[0] < 5:
-    import adafruit_pypixelbuf as _pixelbuf
-else:
-    try:
-        import _pixelbuf
-    except ImportError:
-        import adafruit_pypixelbuf as _pixelbuf
+try:
+    # Used only for typing
+    from types import TracebackType
+    from typing import Optional, Type
+
+    import microcontroller
+except ImportError:
+    pass
 
 
-__version__ = "0.0.0-auto.0"
+__version__ = "0.0.0+auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel.git"
 
 
@@ -41,7 +44,7 @@ GRBW = "GRBW"
 """Green Red Blue White"""
 
 
-class NeoPixel(_pixelbuf.PixelBuf):
+class NeoPixel(adafruit_pixelbuf.PixelBuf):
     """
     A sequence of neopixels.
 
@@ -52,7 +55,8 @@ class NeoPixel(_pixelbuf.PixelBuf):
       brightness
     :param bool auto_write: True if the neopixels should immediately change when set. If False,
       `show` must be called explicitly.
-    :param str pixel_order: Set the pixel color channel order. GRBW is set by default.
+    :param str pixel_order: Set the pixel color channel order. The default is GRB if bpp is set
+      to 3, otherwise GRBW is used as the default.
 
     Example for Circuit Playground Express:
 
@@ -101,49 +105,73 @@ class NeoPixel(_pixelbuf.PixelBuf):
     """
 
     def __init__(
-        self, pin, n, *, bpp=3, brightness=1.0, auto_write=True, pixel_order=None
+        self,
+        pin: microcontroller.Pin,
+        n: int,
+        *,
+        bpp: int = 3,
+        brightness: float = 1.0,
+        auto_write: bool = True,
+        pixel_order: str = None,
     ):
         if not pixel_order:
             pixel_order = GRB if bpp == 3 else GRBW
-        else:
-            if isinstance(pixel_order, tuple):
-                order_list = [RGBW[order] for order in pixel_order]
-                pixel_order = "".join(order_list)
+        elif isinstance(pixel_order, tuple):
+            order_list = [RGBW[order] for order in pixel_order]
+            pixel_order = "".join(order_list)
 
-        super().__init__(
-            n, brightness=brightness, byteorder=pixel_order, auto_write=auto_write
-        )
+        self._power = None
+        if sys.implementation.version[0] >= 7 and getattr(board, "NEOPIXEL", None) == pin:
+            power = getattr(board, "NEOPIXEL_POWER_INVERTED", None)
+            polarity = power is None
+            if not power:
+                power = getattr(board, "NEOPIXEL_POWER", None)
+            if power:
+                try:
+                    self._power = digitalio.DigitalInOut(power)
+                    self._power.switch_to_output(value=polarity)
+                except ValueError:
+                    pass
+
+        super().__init__(n, brightness=brightness, byteorder=pixel_order, auto_write=auto_write)
 
         self.pin = digitalio.DigitalInOut(pin)
         self.pin.direction = digitalio.Direction.OUTPUT
 
-    def deinit(self):
+    def deinit(self) -> None:
         """Blank out the NeoPixels and release the pin."""
         self.fill(0)
         self.show()
         self.pin.deinit()
+        if self._power:
+            self._power.deinit()
 
     def __enter__(self):
         return self
 
-    def __exit__(self, exception_type, exception_value, traceback):
+    def __exit__(
+        self,
+        exception_type: Optional[Type[BaseException]],
+        exception_value: Optional[BaseException],
+        traceback: Optional[TracebackType],
+    ):
         self.deinit()
 
     def __repr__(self):
         return "[" + ", ".join([str(x) for x in self]) + "]"
 
     @property
-    def n(self):
+    def n(self) -> int:
         """
         The number of neopixels in the chain (read-only)
         """
         return len(self)
 
-    def write(self):
+    def write(self) -> None:
         """.. deprecated: 1.0.0
 
         Use ``show`` instead. It matches Micro:Bit and Arduino APIs."""
         self.show()
 
-    def _transmit(self, buffer):
+    def _transmit(self, buffer: bytearray) -> None:
         neopixel_write(self.pin, buffer)

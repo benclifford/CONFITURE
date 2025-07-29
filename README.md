@@ -8,7 +8,7 @@ running on a Pi Pico (RP2040).
 * A jam jar, jam eaten, jar de-labelled and washed
 * Pi Pico
 * NeoPixel LED string (I blew up the first pixel, so I've cut it off)
-* Adafruit CircuitPython 6.2.0-beta.4
+* Adafruit CircuitPython 9.2.8
 * Rotary encoder with push button
 
 
@@ -44,3 +44,9 @@ minicom --device=/dev/ttyACM0 --baud=115200
 
 then press ctrl-C to interrupt and get a python prompt -- otherwise it
 sits there with no output as it runs the LEDs.
+
+## third party drivers
+
+neopixel.py in this repo is neopixel.py from
+0ba2f2122a54a71b1bc3576f87b1ba7dfc9db11e of 
+https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel/
